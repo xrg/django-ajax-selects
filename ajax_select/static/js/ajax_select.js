@@ -34,6 +34,7 @@ $.fn.autocompleteselect = function(options) {
 			$text.val('');
 			addKiller(ui.item.repr);
 			$deck.trigger("added");
+                        $text.hide();
 
 			return false;
 		}
@@ -43,13 +44,14 @@ $.fn.autocompleteselect = function(options) {
 			killButton = '<span class="ui-icon ui-icon-trash" id="'+killer_id+'">X</span> ';
 			if (repr) {
 				$deck.empty();
-				$deck.append("<div>" + killButton + repr + "</div>");
+				$deck.append("<div>" + repr + killButton + "</div>");
 			} else {
 				$("#"+id+"_on_deck > div").prepend(killButton);
 			}
 			$("#" + killer_id).click(function() {
 				kill();
 				$deck.trigger("killed");
+                                $text.show();
 			});
 		}
 
@@ -64,6 +66,7 @@ $.fn.autocompleteselect = function(options) {
 
 		if (options.initial) {
 			its = options.initial;
+                        $text.hide();
 			addKiller(its[0], its[1]);
 		}
 
@@ -99,7 +102,7 @@ $.fn.autocompleteselectmultiple = function(options) {
 		function addKiller(repr, pk) {
 			killer_id = "kill_" + pk + id;
 			killButton = '<span class="ui-icon ui-icon-trash" id="'+killer_id+'">X</span> ';
-			$deck.append('<div id="'+id+'_on_deck_'+pk+'">' + killButton + repr + ' </div>');
+			$deck.append('<div id="'+id+'_on_deck_'+pk+'">' + repr + killButton + ' </div>');
 
 			$("#"+killer_id).click(function() {
 				kill(pk);
