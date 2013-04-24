@@ -68,7 +68,9 @@ $.fn.autocompleteselect = function(options) {
 			its = options.initial;
                         $text.hide();
 			addKiller(its[0], its[1]);
-		}
+		} else {
+                    $deck.children().hide();
+                }
 
 		$this.bind('didAddPopup', function(event, pk, repr) {
 			ui = { item: { pk: pk, repr: repr } }
